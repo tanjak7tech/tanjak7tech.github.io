@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Belajar Buat Apps TodoList</title>
-  <style>
+ <style>
     body {
       background-color: #0b0d17;
       color: white;
@@ -18,9 +18,21 @@
       color: black;
       padding: 10px;
       font-size: 14px;
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 9999;
+    }
+    .notification.show {
+      opacity: 1;
     }
     .logo {
-      margin-top: 30px;
+      margin-top: 80px;
     }
     .title {
       font-size: 22px;
@@ -51,18 +63,17 @@
 <body>
 
   <!-- Fake "recent join" notification -->
-  <div class="notification">
-    K****l telah membeli ebook belaja develop apps todolist
-  </div>
+    <!-- Notification container -->
+  <div id="notification" class="notification"></div>
 
   <!-- Logo -->
   <div class="logo">
-    <img src="your-logo.png" alt="Online Hustling Campus" width="250">
+    <img src="tanjak7tech-logo.png" alt="Tanjak 7 Tech" width="250">
   </div>
 
   <!-- Title & Subtitle -->
-  <div class="title">TodoList</div>
-  <div class="subtitle">Tambah portfolio dengan belajar buat todolist!</div>
+  <div class="title">MARI BELAJAR JAVASCRIPT</div>
+  <div class="subtitle">Tambah portfolio dengan belajar buat apps TODOLIST!</div>
 
   <!-- Stripe Payment Link Button -->
   <a href="YOUR_STRIPE_PAYMENT_LINK_HERE" target="_blank" class="button">
@@ -70,4 +81,37 @@
   </a>
 
 </body>
+
+ <script>
+    // Mock data
+    const messages = [
+      "A****l telah sertai Online Hustling Campus 2 minit lalu",
+      "N****a baru join Online Hustling Campus 5 minit lalu",
+      "M****d telah daftar 10 minit lalu",
+      "S****i baru saja sertai 15 minit lalu",
+      "R****n join Online Hustling Campus 20 minit lalu"
+    ];
+
+    const notification = document.getElementById("notification");
+
+    function showNotification(msg) {
+      notification.textContent = msg;
+      notification.classList.add("show");
+
+      // hide after 4 seconds
+      setTimeout(() => {
+        notification.classList.remove("show");
+      }, 4000);
+    }
+
+    // loop messages every 6 seconds
+    let i = 0;
+    setInterval(() => {
+      showNotification(messages[i]);
+      i = (i + 1) % messages.length;
+    }, 6000);
+
+    // show first message immediately
+    showNotification(messages[0]);
+  </script>
 </html>
